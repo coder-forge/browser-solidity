@@ -10,11 +10,12 @@
     "browser-test-remote-ie": "nightwatch --config nightwatch.js --env ie",
     "browser-test-remote-safari": "nightwatch --config nightwatch.js --env safari",
     "browser-test-remote-parallel": "nightwatch --config nightwatch.js --env safari,ie,default,chrome",
-    "build": "mkdir build; browserify src/index.js -g yo-yoify -o build/app.js -t [ babelify ]; babel --plugins=transform-es2015-template-literals build/app.js --out-file build/app.js",
-    "csslint": "csslint --ignore=order-alphabetical --errors='errors,duplicate-properties,empty-rules' --exclude-list='assets/css/font-awesome.min.css' assets/css/",
-    "downloadsolc": "rm soljson.js; wget https://ethereum.github.io/solc-bin/soljson.js",
+    "build": "mkdir public/build; browserify src/index.js -g yo-yoify -o public/build/app.js -t [ babelify ]; babel --plugins=transform-es2015-template-literals public/build/app.js --out-file public/build/app.js",
+    "csslint": "csslint --ignore=order-alphabetical --errors='errors,duplicate-properties,empty-rules' --exclude-list='public/assets/css/font-awesome.min.css' public/assets/css/",
+    "downloadsolc": "cd public; rm soljson.js; wget https://ethereum.github.io/solc-bin/soljson.js",
     "lint": "standard",
     "serve": "http-server .",
+    "start": "node app.js",
     "test": "standard; babel src --out-dir babelify-src; node test/index.js"
   },
   "devDependencies": {
@@ -87,5 +88,8 @@
       "soljson.js"
     ],
     "parser": "babel-eslint"
+  },
+  "dependencies": {
+    "express": "^4.15.2"
   }
 }
